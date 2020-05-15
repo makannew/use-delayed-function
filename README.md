@@ -12,7 +12,7 @@ It can be used for [debouncing](https://css-tricks.com/debouncing-throttling-exp
 
 It is also a handy tool for applying timing logics inside react components e.g. Showing a notification for few seconds.
 
-Activities of this hook doesn't change state of the component(unless called function does) so it doesn't cause rendering. This is the main feature of this hook, the stateful version of this hook is [`use-delayed-state`](https://github.com/makannew/use-delayed-state)
+Activities of this hook doesn't change state of the component (unless the called function does) so it won't cause rendering, so to the called function should either `setState` or do some side effects. The stateful version of this hook is [`use-delayed-state`](https://github.com/makannew/use-delayed-state)
 
 ## Install
 
