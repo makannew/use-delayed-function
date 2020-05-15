@@ -4,7 +4,7 @@
 
 [![NPM](https://img.shields.io/npm/v/use-delayed-function.svg)](https://www.npmjs.com/package/use-delayed-function) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-This hook provide a safe way to call a function with delay and it takes care of all required cleanup. 
+This hook provides a safe way to call a function with delay and it takes care of all required cleanup. 
 
 ## Use cases
 
