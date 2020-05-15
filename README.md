@@ -4,7 +4,7 @@
 
 [![NPM](https://img.shields.io/npm/v/use-delayed-function.svg)](https://www.npmjs.com/package/use-delayed-function) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-This hook provides a safe way to call a function with delay and it takes care of all required cleanup. 
+This hook provides a safe way to call a function with delay and it takes care of all required cleanup. In addition, these delayed functions could chain to run in sequence.
 
 ## Use cases
 
@@ -12,7 +12,7 @@ It can be used for [debouncing](https://css-tricks.com/debouncing-throttling-exp
 
 It is also a handy tool for applying timing logics inside react components e.g. Showing a notification for few seconds.
 
-Activities of this hook doesn't change state of the component (unless the called function does) so it won't cause rendering, so to the called function should either `setState` or do some side effects. The stateful version of this hook is [`use-delayed-state`](https://github.com/makannew/use-delayed-state)
+Activities of this hook doesn't change state of the component (unless the called function set an state) so it won't cause extra rendering. The stateful version of this hook is [`use-delayed-state`](https://github.com/makannew/use-delayed-state)
 
 ## Install
 
