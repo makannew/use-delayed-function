@@ -15,16 +15,20 @@ npm install --save use-delayed-function
 ## Usage
 
 ```jsx
+import React, { useRef} from 'react'
+
+import useDelayedFunction from 'use-delayed-function'
+
 const App = ({ delay = 4000 }) => {
   const divRef = useRef()
-  
-  const [changeWithDelay] = useDelayedFunction(changeInnerHTML, delay)
+
+  const [callWithDelay] = useDelayedFunction(changeInnerHTML, delay)
 
   function changeInnerHTML(newInnerHTML) {
     divRef.current.innerHTML = newInnerHTML
   }
 
-  changeWithDelay('This is the new InnerHTML')
+  callWithDelay('This is the new InnerHTML')
 
   return <div ref={divRef}>{`This innerHTML will change in ${delay}ms`}</div>
 }
