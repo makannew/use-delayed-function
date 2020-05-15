@@ -2,7 +2,14 @@
   "name": "use-delayed-function",
   "version": "1.0.0",
   "description": "React hook to call function with delay",
-  "author": "makannew",
+  "keywords": [
+    "react",
+    "hook",
+    "function",
+    "delay",
+    "debouncing"
+  ],
+  "author": "Makan Edrisi",
   "license": "MIT",
   "repository": "makannew/use-delayed-function",
   "main": "dist/index.js",

@@ -26,10 +26,14 @@ const App = () => {
 
   return (
     <div>
-      <p className='description'>
-        Right content will be updated after debouncing delay. Try it by typing
-        in textarea.
-      </p>
+      <div className='description'>
+        <h3>Stateless debouncing</h3>
+        <p>
+          Result will be updated after debouncing delay. Try it by typing in
+          textarea.
+        </p>
+      </div>
+
       <div className='container'>
         <div className='form-container'>
           <form>
