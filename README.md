@@ -8,7 +8,7 @@ This hook provides a safe way to call a function with delay and it takes care of
 
 ## Use cases
 
-It can be used for [debouncing](https://css-tricks.com/debouncing-throttling-explained-examples/#article-header-id-0) which simply delays all consecuative attempts to call a function and if the last call persist for enough time it runs.
+It can be used for [debouncing](https://css-tricks.com/debouncing-throttling-explained-examples/#article-header-id-0) which simply delays all consecuative attempts to call a function and finally it runs if the last call persist for enough time.
 
 It is also a handy tool for applying timing logics inside react components e.g. Showing a notification for few seconds.
 
