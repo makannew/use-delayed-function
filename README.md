@@ -139,8 +139,11 @@ First any changes debounced, then a css class added to show the changes and fina
     `cancelIt` method.
   
 - #### `delay`
-  - Is delay before calling the `originalFunction`
-  - It is in milliseconds
+  - Is amount of delay before calling the `originalFunction`
+  - Is in milliseconds
+  - If not specified considered as 0
+  - If it specified by a prop or state any changes to its value will change delay duration in runtime
+  
 - #### `rejectOnCancel`
   - If `rejectOnCancel===true` the canceled calls will reject to 
     `{ message: 'Function call canceled', timestamp: Date.now() }`
