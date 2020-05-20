@@ -137,7 +137,7 @@ First any changes debounced, then a css class added to show the changes and fina
   - Is a wrapper function which always returns a promise. 
   - It accepts and passes down arguments to the `originalFunction`.
   - It will resolve to return value of the `originalFunction`.
-  - After it successfully resolved, it is the best time for `setState` or DOM manipulation tasks if desirable.
+  - If "originalFunction" is an async function the best time for `setState` or DOM manipulation tasks is where it resolved.
     `delayedFunction(para).then(doSetState)`
   - Consecutive calls to this function will cancel previous unfinished calls. 
   
@@ -151,8 +151,11 @@ First any changes debounced, then a css class added to show the changes and fina
 - #### `originalFunction`
   - It can be a regular or async function
   - It can accept arguments and return values
-  - Any `setState` or DOM manipulation is forbidden inside this function because it throw errors if
-    component was unmounted.
+  - `setState` or DOM manipulation tasks can be done inside this function with no worries if they are synchronous.
+  - Any `setState` or DOM manipulation based on async processes is forbidden inside this function because it throw errors if
+    component was unmounted. For this purpose use this format
+    `delayedFunction(para).then(result=>{setState(result)})`
+    
   
 - #### `delay`
   - Is delay before calling the `originalFunction`
