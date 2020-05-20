@@ -31,13 +31,13 @@ import useDelayedFunction from 'use-delayed-function'
 const SimpleExample = ({ delay = 4000 }) => {
   const divRef = useRef()
 
-  const [callWithDelay] = useDelayedFunction(changeInnerHTML, delay)
+  const [changeContentLater] = useDelayedFunction(changeContent, delay)
 
-  function changeInnerHTML(newInnerHTML) {
+  function changeContent(newInnerHTML) {
     divRef.current.innerHTML = newInnerHTML
   }
 
-  callWithDelay('This is the new InnerHTML')
+  changeContentLater('This is the new InnerHTML')
 
   return (
     <div>
