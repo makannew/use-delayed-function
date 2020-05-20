@@ -42,9 +42,9 @@ export default function useDelayedFunction(
     })
   }
 
-  const cancelIt = () => {
+  const cancelIt = (preventReject) => {
     if (lastCall.cancel) {
-      lastCall.cancel()
+      lastCall.cancel(preventReject)
       lastCall.cancel = null
     }
     if (lastCall.timeout) {
@@ -56,7 +56,7 @@ export default function useDelayedFunction(
   useEffect(() => {
     return () => {
       if (lastCall.cancel) {
-        lastCall.cancel()
+        lastCall.cancel(true)
       }
       if (lastCall.timeout) {
         clearTimeout(lastCall.timeout)

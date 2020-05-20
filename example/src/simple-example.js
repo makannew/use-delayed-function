@@ -1,48 +1,25 @@
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 
 import useDelayedFunction from 'use-delayed-function'
 
 const SimpleExample = ({ delay = 4000 }) => {
   const divRef = useRef()
 
-  const [callWithDelay] = useDelayedFunction(changeInnerHTML, delay)
+  const [changeContentLater] = useDelayedFunction(changeContent, delay)
 
-  function changeInnerHTML(newInnerHTML) {
-    divRef.current.innerHTML = newInnerHTML
+  function changeContent(target, content) {
+    target.innerHTML = content
   }
 
-  callWithDelay('This is the new InnerHTML')
-
-  const sourceCode = `import React, { useRef } from 'react'
-import useDelayedFunction from 'use-delayed-function'
-
-const SimpleExample = ({ delay = 4000 }) => {
-const divRef = useRef()
-
-const [callWithDelay] = useDelayedFunction(changeInnerHTML, delay)
-
-function changeInnerHTML(newInnerHTML) {
-  divRef.current.innerHTML = newInnerHTML
-}
-
-callWithDelay('This is the new InnerHTML')
-
-return (
-  <div
-    ref={divRef}
-    className='container'
-  >{\`This innerHTML will change in ${delay}ms\`}</div>
-)
-}
-
-export default SimpleExample`
+  useEffect(() => {
+    changeContentLater(divRef.current, 'This is the new content')
+  }, [])
 
   return (
     <div>
-      <div ref={divRef} className='container'>
-        {`This innerHTML will change in ${delay}ms`}
+      <div ref={divRef} className='description'>
+        {`This content will change after ${delay}ms from component mounting`}
       </div>
-      <code>{sourceCode}</code>
     </div>
   )
 }
