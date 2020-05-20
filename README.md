@@ -36,9 +36,10 @@ Activities of this hook doesn't change state of the component (unless the called
 npm install --save use-delayed-function
 ```
 
-## Examples
+## How to use
 
 To see deployed examples and source codes click [here](https://makannew.github.io/use-delayed-function/).
+
 The most simplest use case is calling a function in future. In below example `changeContentLater` is a function that will call `changeContent` with delay.
 Note that `delay` is a prop (it could be a local state as well) and it dynamically controls delay value.
 
