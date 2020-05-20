@@ -127,12 +127,24 @@ First any changes debounced, then a css class added to show the changes and fina
 - #### `delayedFunction` 
   - Is a wrapper function which always returns a promise. 
   - It accepts and passes down arguments to the `originalFunction`.
-  - It will resolve to `originalFunction` return value unless it canceled before by either new call to this function or by          `cancelIt` method.
-
+  - It will resolve to return value of `originalFunction`.
+  - Consecutive calls to this function will cancel previous unfinished calls. 
 - #### `cancelIt(doNotReject)`
-  - Is a function which will cancel any already planed call to `originalFunction`.
+  - Is a function which will cancel any planed call to `originalFunction`.
   - If it was too late and `originalFunction` already fired it will break the chain and ignore its return value.
-  - Calling this function will cause reject of `delayedFunction` return promise if `rejectOnCancel===true`
+  - Calling this function will cause reject of `delayedFunction` if `rejectOnCancel===true` otherwise leave
+    the promise in pending state to be removed by garbage collector.
+  - If `doNotReject==true` it won't reject the promise even `rejectOnCancel===true`
+  - unless it canceled before by either new call or by         
+    `cancelIt` method.
+  
+- #### `delay`
+  - Is delay before calling the `originalFunction`
+  - It is in milliseconds
+- #### `rejectOnCancel`
+  - If `rejectOnCancel===true` the canceled calls will reject to 
+    `{ message: 'Function call canceled', timestamp: Date.now() }`
+
 
 
 
