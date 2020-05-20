@@ -53,9 +53,12 @@ export default SimpleExample
 ```
 
 
-In debouncing example, when any change happened in textarea this line of code ```jsx
-debounceChange(e.target.value).then(addStyleNow).then(removeStyleLater)```
+In debouncing example, when a change happened in textarea this line of code 
+```jsx
+debounceChange(e.target.value).then(addStyleNow).then(removeStyleLater)
+```
 debounce the change, then add style after change applied and finally remove the style after 1 second.
+Note that `delay` could change dynamically through changing its state (it could be a prop as well).
 
 ```jsx
   const [delay, setDelay] = useState(defaultDelay)
