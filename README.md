@@ -7,7 +7,7 @@
 
 This hook provides a safe way to call a function with delay and it takes care of required cleanups. 
 
-It doesn't have state and it won't cause extra rendering, so it is useful for sequential (or asynchronous) tasks where we want chain async functions on top of each others but we don't want to change states in every stage.
+It doesn't have state and it won't cause extra rendering, so it is useful for sequential (or asynchronous) tasks where we want chain async functions on top of each others.
 
 
 ## Install
