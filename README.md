@@ -4,7 +4,16 @@
 
 [![NPM](https://img.shields.io/npm/v/use-delayed-function.svg)](https://www.npmjs.com/package/use-delayed-function) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+
 This hook provides a safe way to call a function with delay and it takes care of required cleanups. In addition, these delayed functions could chain together so it can be used to accomplish sequential (or asynchronous) tasks where we don't want to have sequential state changes.
+```jsx
+  const [delayedFunction, cancelIt] = useDelayedFunction(
+    originalFunction,
+    delay,
+    rejectOnCancel
+  )
+```
+
 
 ## Use cases
 
