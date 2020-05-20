@@ -36,7 +36,7 @@ const DebouncingExample = ({ defaultDelay = 900 }) => {
       <div className='description'>
         <h3>Stateless debouncing</h3>
         <p>
-          After debouncing delay result will be updated. Try it by typing in
+          While typing debounced result will be updated. Try it by typing in
           textarea.
         </p>
       </div>

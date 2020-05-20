@@ -145,6 +145,7 @@ button {
 }
 
 .async-example {
+  margin-top: 80px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -152,4 +153,19 @@ button {
 
 .async-example p {
   padding: 20px;
+}
+
+.simple-example {
+  margin-top: 80px;
+}
+
+.simple-example p {
+  padding: 50px 20px;
+}
+
+.initializing-example {
+  margin-top: 80px;
+}
+.initializing-example p {
+  padding: 50px 20px;
 }

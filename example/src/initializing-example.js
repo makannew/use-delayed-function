@@ -9,8 +9,8 @@ const InitializingExample = () => {
   useEffect(() => {}, [])
 
   return (
-    <div ref={divRef} className='container'>
-      <div>{`Loading`}</div>
+    <div ref={divRef} className='container initializing-example'>
+      <p>{`Loading`}</p>
       <div className='links'>
         <a href='https://github.com/makannew/use-delayed-function/blob/master/example/src/initializing-example.js'>
           Source code
