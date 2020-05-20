@@ -6,12 +6,19 @@
 
 
 This hook provides a safe way to call a function with delay and it takes care of required cleanups. In addition, these delayed functions could chain together so it can be used to accomplish sequential (or asynchronous) tasks where we don't want to have sequential state changes.
+
+Hook construction:
 ```jsx
   const [delayedFunction, cancelIt] = useDelayedFunction(
     originalFunction,
     delay,
     rejectOnCancel
   )
+```
+
+General usage format:
+```
+delayedFunction(para).then(result=>{setState(result)})
 ```
 
 
