@@ -167,11 +167,11 @@ First any changes debounced, then a css class added to show the changes and fina
   - Is the delay before calling the `originalFunction`
   - Is in milliseconds
   - If not specified considered as 0
-  - If it specified by a prop or state any changes to its value will change delay duration in runtime
+  - If it specified by a prop or state they control delay duration runtime (delay will change if they change).
   
 - #### `rejectOnCancel`
   - Is an optional boolian parameter. If not specified considered as `false`
-  - If `rejectOnCancel===true` the canceled calls will reject to 
+  - If `rejectOnCancel==true` the canceled calls will reject to 
     `{ message: 'Function call canceled', timestamp: Date.now() }`
 
 
