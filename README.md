@@ -103,7 +103,7 @@ As you can see in this line of code:
       .then(addStyleNow)
       .then(removeStyleLater)
 ```
-First any changes debounced, then style added to show the changes and finally style will be removed after 1 second.
+First any changes debounced, then a css class added to show the changes and finally it will be removed after 1 second.
 
 ## License
 
