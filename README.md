@@ -127,24 +127,31 @@ First any changes debounced, then a css class added to show the changes and fina
 - #### `delayedFunction` 
   - Is a wrapper function which always returns a promise. 
   - It accepts and passes down arguments to the `originalFunction`.
-  - It will resolve to return value of `originalFunction`.
+  - It will resolve to return value of the `originalFunction`.
   - Consecutive calls to this function will cancel previous unfinished calls. 
+  
 - #### `cancelIt(doNotReject)`
-  - Is a function which will cancel any planed call to `originalFunction`.
+  - Is a function which will cancel any pending call to `originalFunction`.
   - If it was too late and `originalFunction` already fired it will break the chain and ignore its return value.
   - Calling this function will cause reject of `delayedFunction` if `rejectOnCancel===true` otherwise leave
     the promise in pending state to be removed by garbage collector.
   - If `doNotReject==true` it won't reject the promise even `rejectOnCancel===true`
-  - unless it canceled before by either new call or by         
-    `cancelIt` method.
+  
+- #### `originalFunction`
+  - It can be a regular or async function
+  - It can accept arguments and return values
+  - Any `setState` or DOM manipulation is forbidden inside this function because it causes error if
+    component was unmounted.
+  
   
 - #### `delay`
-  - Is amount of delay before calling the `originalFunction`
+  - Is delay before calling the `originalFunction`
   - Is in milliseconds
   - If not specified considered as 0
   - If it specified by a prop or state any changes to its value will change delay duration in runtime
   
 - #### `rejectOnCancel`
+  - Is an optional boolian parameter. If not specified considered as `false`
   - If `rejectOnCancel===true` the canceled calls will reject to 
     `{ message: 'Function call canceled', timestamp: Date.now() }`
 
