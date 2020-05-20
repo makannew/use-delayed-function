@@ -74,7 +74,7 @@ const DebouncingExample = ({ defaultDelay = 900 }) => {
         </div>
       </div>
       <div className='links'>
-        <a href='https://github.com/makannew/use-delayed-function/blob/master/example/src/App.js'>
+        <a href='https://github.com/makannew/use-delayed-function/blob/master/example/src/debouncing-example.js'>
           Source code
         </a>
         <a href='https://github.com/makannew/use-delayed-function'>

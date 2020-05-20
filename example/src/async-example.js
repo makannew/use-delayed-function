@@ -61,6 +61,14 @@ const AsyncExample = () => {
             : null}
         </p>
       </div>
+      <div className='links'>
+        <a href='https://github.com/makannew/use-delayed-function/blob/master/example/src/async-example.js'>
+          Source code
+        </a>
+        <a href='https://github.com/makannew/use-delayed-function'>
+          use-delayed-function
+        </a>
+      </div>
     </div>
   )
 }
