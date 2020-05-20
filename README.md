@@ -23,10 +23,10 @@ npm install --save use-delayed-function
 ## Usage
 
 The most simplest use case is calling a function in future. In below example `changeContentLater` is a function that will call `changeContent` with delay.
-Note that `delay` is a prop (it could be a local state as well) and it used to control function call delay dynamically.
+Note that `delay` is a prop (it could be a local state as well) and it is for controling delay duration dynamically.
 
 ```jsx
-import React, { useRef } from 'react'
+import React, { useRef, useEffect } from 'react'
 
 import useDelayedFunction from 'use-delayed-function'
 
@@ -35,16 +35,18 @@ const SimpleExample = ({ delay = 4000 }) => {
 
   const [changeContentLater] = useDelayedFunction(changeContent, delay)
 
-  function changeContent(newInnerHTML) {
-    divRef.current.innerHTML = newInnerHTML
+  function changeContent(target, content) {
+    target.innerHTML = content
   }
 
-  changeContentLater('This is the new InnerHTML')
+  useEffect(() => {
+    changeContentLater(divRef.current, 'This is the new content')
+  }, [])
 
   return (
     <div>
-      <div ref={divRef}>
-        {`This innerHTML will change in ${delay}ms`}
+      <div ref={divRef} className='description'>
+        {`This content will change after ${delay}ms from component mounting`}
       </div>
     </div>
   )
