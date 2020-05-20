@@ -4,7 +4,23 @@
 
 [![NPM](https://img.shields.io/npm/v/use-delayed-function.svg)](https://www.npmjs.com/package/use-delayed-function) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
-This hook provides a safe way to call a function with delay and it takes care of required cleanups. In addition, these delayed functions could chain together so it can be used to accomplish sequential (or asynchronous) tasks where we don't want to have sequential state change.
+
+This hook provides a safe way to call a function with delay and it takes care of required cleanups. In addition, these delayed functions could chain together so it can be used to accomplish sequential (or asynchronous) tasks where we don't want to have sequential state changes.
+
+General structure:
+```jsx
+  const [delayedFunction, cancelIt] = useDelayedFunction(
+    originalFunction,
+    delay,
+    rejectOnCancel
+  )
+```
+
+General usage format:
+```
+delayedFunction(para).then(result=>{setState(result)})
+```
+
 
 ## Use cases
 
@@ -20,29 +36,141 @@ Activities of this hook doesn't change state of the component (unless the called
 npm install --save use-delayed-function
 ```
 
-## Usage
+## How to use
+
+To see deployed examples and source codes click [here](https://makannew.github.io/use-delayed-function/).
+
+The most simplest use case is calling a function in future. In below example `changeContentLater` is a function that will call `changeContent` with delay.
+Note that `delay` is a prop (it could be a local state as well) and it dynamically controls delay value.
 
 ```jsx
-import React, { useRef} from 'react'
+import React, { useRef, useEffect } from 'react'
 
 import useDelayedFunction from 'use-delayed-function'
 
-const App = ({ delay = 4000 }) => {
+const SimpleExample = ({ delay = 4000 }) => {
   const divRef = useRef()
 
-  const [callWithDelay] = useDelayedFunction(changeInnerHTML, delay)
+  const [changeContentLater] = useDelayedFunction(changeContent, delay)
 
-  function changeInnerHTML(newInnerHTML) {
-    divRef.current.innerHTML = newInnerHTML
+  function changeContent(target, content) {
+    target.innerHTML = content
   }
 
-  callWithDelay('This is the new InnerHTML')
+  useEffect(() => {
+    changeContentLater(divRef.current, 'This is the new content')
+  }, [])
 
-  return <div ref={divRef}>{`This innerHTML will change in ${delay}ms`}</div>
+  return (
+    <div>
+      <div ref={divRef} className='description'>
+        {`This content will change after ${delay}ms from component mounting`}
+      </div>
+    </div>
+  )
 }
 
-export default App
+export default SimpleExample
+
 ```
+
+
+In debouncing example any debounced changes in textarea appears in another paragraph.
+
+```jsx
+  const [debounceChange] = useDelayedFunction(changeContent, 900)
+
+  const [removeStyleLater] = useDelayedFunction(removeStyle, 1000)
+
+  const [addStyleNow] = useDelayedFunction(addStyle)
+
+  function changeContent(target, content) {
+    target.innerHTML = content
+    return target
+  }
+
+  function addStyle(target) {
+    target.className = 'updating'
+    return target
+  }
+
+  function removeStyle(target) {
+    target.className = ''
+  }
+
+  function handleChange(e) {
+    debounceChange(contentRef.current, e.target.value)
+      .then(addStyleNow)
+      .then(removeStyleLater)
+  }
+  return (
+    <div>
+      <textarea
+        type='text'
+        placeholder='Type something'
+        onChange={handleChange}
+      />
+      <p ref={contentRef}></p>
+    </div>
+  )
+
+```
+As you can see in this line of code:
+```jsx
+    debounceChange(contentRef.current, e.target.value)
+      .then(addStyleNow)
+      .then(removeStyleLater)
+```
+First any changes debounced, then a css class added to show the changes and finally it will be removed after 1 second.
+
+## Details
+
+```jsx
+  const [delayedFunction, cancelIt] = useDelayedFunction(
+    originalFunction,
+    delay,
+    rejectOnCancel
+  )
+```
+
+- #### `delayedFunction` 
+  - Is a wrapper function which always returns a promise. 
+  - It accepts and passes down arguments to the `originalFunction`.
+  - It will resolve to return value of the `originalFunction`.
+  - After it successfully resolved, it is the best time for `setState` or DOM manipulation tasks if desirable.
+    `delayedFunction(para).then(doSetState)`
+  - Consecutive calls to this function will cancel previous unfinished calls. 
+  
+- #### `cancelIt(doNotReject)`
+  - Is a function which will cancel any pending call to `originalFunction`.
+  - If it was too late and `originalFunction` already fired it will break the chain and ignore its return value.
+  - Calling this function will cause reject of `delayedFunction` if `rejectOnCancel===true` otherwise leave
+    the promise in pending state to be removed by garbage collector.
+  - If `doNotReject==true` it won't reject the promise even `rejectOnCancel===true`
+  
+- #### `originalFunction`
+  - It can be a regular or async function
+  - It can accept arguments and return values
+  - Any `setState` or DOM manipulation is forbidden inside this function because it throw errors if
+    component was unmounted.
+  
+- #### `delay`
+  - Is delay before calling the `originalFunction`
+  - Is in milliseconds
+  - If not specified considered as 0
+  - If it specified by a prop or state any changes to its value will change delay duration in runtime
+  
+- #### `rejectOnCancel`
+  - Is an optional boolian parameter. If not specified considered as `false`
+  - If `rejectOnCancel===true` the canceled calls will reject to 
+    `{ message: 'Function call canceled', timestamp: Date.now() }`
+
+
+
+
+
+
+
 
 ## License
 
