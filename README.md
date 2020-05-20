@@ -22,7 +22,7 @@ npm install --save use-delayed-function
 
 ## Usage
 
-In simple example a function called with delay to change content of a `div`.
+In first example a function called with delay to change content of a `div`.
 ```jsx
 import React, { useRef } from 'react'
 
@@ -53,7 +53,8 @@ export default SimpleExample
 ```
 
 
-In debouncing example, when a change happened in textarea this line of code 
+In second example, debounced content shown while typing in a textarea. 
+When a change happened, this line of code 
 ```jsx
 debounceChange(e.target.value).then(addStyleNow).then(removeStyleLater)
 ```
