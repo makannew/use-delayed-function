@@ -22,7 +22,7 @@ npm install --save use-delayed-function
 
 ## Usage
 
-In first example a function called with delay to change content of a `div`.
+The most simplest use case is calling a function in future. In below example `changeContentLater` is a function that will call `changeContent` with delay.
 ```jsx
 import React, { useRef } from 'react'
 
@@ -52,14 +52,7 @@ export default SimpleExample
 
 ```
 
-
-In second example, debounced content shown while typing in a textarea. 
-When a change happened, this line of code 
-```jsx
-debounceChange(e.target.value).then(addStyleNow).then(removeStyleLater)
-```
-debounce the change, then add style after change applied and finally remove the style after 1 second.
-Note that `delay` could change dynamically through changing its state (it could be a prop as well).
+Another use case is debouncing changes.
 
 ```jsx
   const [delay, setDelay] = useState(defaultDelay)
@@ -98,6 +91,12 @@ Note that `delay` could change dynamically through changing its state (it could 
   )
 
 ```
+This line of code:
+```jsx
+debounceChange(e.target.value).then(addStyleNow).then(removeStyleLater)
+```
+debounce the changes, then add style to show change applied and finally remove the style after 1 second.
+Note that `delay` could change dynamically through changing its state (it could be a prop as well).
 
 ## License
 
