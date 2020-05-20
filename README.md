@@ -33,7 +33,7 @@ delayedFunction(para).then(result=>{setState(result)})
 
 ## Use cases
 
-It can be used for [debouncing](https://css-tricks.com/debouncing-throttling-explained-examples/#article-header-id-0) which simply delays all consecuative attempts to call a function and finally the last attempt runs if it persists for enough time.
+It can be used for [debouncing](https://css-tricks.com/debouncing-throttling-explained-examples/#article-header-id-0) which simply delays all consecuative attempts to call a function and finally the last attempt runs if it persists enough time.
 
 It is also a handy tool for applying timing logics inside react components e.g. Showing a notification for few seconds.
 
