@@ -22,12 +22,13 @@ npm install --save use-delayed-function
 
 ## Usage
 
+In simple example a function called with delay to change content of a `div`.
 ```jsx
-import React, { useRef} from 'react'
+import React, { useRef } from 'react'
 
 import useDelayedFunction from 'use-delayed-function'
 
-const App = ({ delay = 4000 }) => {
+const SimpleExample = ({ delay = 4000 }) => {
   const divRef = useRef()
 
   const [callWithDelay] = useDelayedFunction(changeInnerHTML, delay)
@@ -38,10 +39,59 @@ const App = ({ delay = 4000 }) => {
 
   callWithDelay('This is the new InnerHTML')
 
-  return <div ref={divRef}>{`This innerHTML will change in ${delay}ms`}</div>
+  return (
+    <div>
+      <div ref={divRef}>
+        {`This innerHTML will change in ${delay}ms`}
+      </div>
+    </div>
+  )
 }
 
-export default App
+export default SimpleExample
+
+```
+
+
+In debouncing example, when any change happened in textarea this line of code ```debounceChange(e.target.value).then(addStyleNow).then(removeStyleLater)```
+debounce the change, then add style after change applied and finally remove the style after 1 second.
+
+```
+  const [delay, setDelay] = useState(defaultDelay)
+
+  const [debounceChange] = useDelayedFunction(changeContent, delay)
+
+  const [removeStyleLater] = useDelayedFunction(removeStyle, 1000)
+
+  const [addStyleNow] = useDelayedFunction(addStyle)
+
+  function changeContent(content) {
+    contentRef.current.innerHTML = content
+  }
+
+  function removeStyle() {
+    contentRef.current.className = ''
+  }
+
+  function addStyle() {
+    contentRef.current.className = 'updating'
+  }
+
+  function handleChange(e) {
+    debounceChange(e.target.value).then(addStyleNow).then(removeStyleLater)
+  }
+  
+  return (
+    <div>
+      <textarea
+        type='text'
+        placeholder='Type something'
+        onChange={handleChange}
+      />
+      <p ref={contentRef}></p>
+    </div>
+  )
+
 ```
 
 ## License
