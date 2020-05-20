@@ -101,7 +101,7 @@ As you can see in this line of code:
       .then(addStyleNow)
       .then(removeStyleLater)
 ```
-changes debounced, then add style to show the applied change and finally remove the style after 1 second.
+changes debounced, then style added to show the changes and finally style will be removed after 1 second.
 
 ## License
 
