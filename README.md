@@ -128,8 +128,8 @@ First any changes debounced, then a css class added to show the changes and fina
 Is a wrapper function which always returns a promise. It accepts and passes down arguments to the `originalFunction`.
 It will resolve to `originalFunction` return value unless it canceled before by either new call to this function or by `cancelIt` method.
 
-- ### `cancelIt(doNotReject)`
---Is a function which will cancel any already planed call to `originalFunction`.
+- #### `cancelIt(doNotReject)`
+-- Is a function which will cancel any already planed call to `originalFunction`.
 If it was too late and `originalFunction` already fired it will break the chain and ignore its return value.
 Calling this function will cause reject of `delayedFunction` return promise if `rejectOnCancel===true`
 
