@@ -37,6 +37,8 @@ It can be used for [debouncing](https://css-tricks.com/debouncing-throttling-exp
 
 It is also a handy tool for applying timing logics inside react components e.g. Showing a notification for few seconds.
 
+It is also a good choice to handle initializing stage of a component. Combination of calling functions, async task or even changing states in sequence can be handled through promise chain provided behind the scene. This kind of behaviour is mostly desirable while initializing a component.
+
 Activities of this hook doesn't change state of the component (unless the called function set an state) so it won't cause extra rendering. The stateful version of this hook is [`use-delayed-state`](https://github.com/makannew/use-delayed-state)
 
 
