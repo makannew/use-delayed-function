@@ -121,13 +121,13 @@ In debouncing example any debounced changes in textarea appears in another parag
   )
 
 ```
-As you can see in this line of code:
+As you can see in this line of code we can easily manage the timing logic that we want.
 ```jsx
     debounceChange(contentRef.current, e.target.value)
       .then(addStyleNow)
       .then(removeStyleLater)
 ```
-First any changes debounced, then a css class added to show the changes and finally it will be removed after 1 second.
+
 
 ## Details
 
