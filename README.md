@@ -64,22 +64,25 @@ Another use case is changes debouncing. In below example debounced change in tex
 
   const [addStyleNow] = useDelayedFunction(addStyle)
 
-  function changeContent(content) {
-    contentRef.current.innerHTML = content
+  function changeContent(target, content) {
+    target.innerHTML = content
+    return target
   }
 
-  function removeStyle() {
-    contentRef.current.className = ''
+  function addStyle(target) {
+    target.className = 'updating'
+    return target
   }
 
-  function addStyle() {
-    contentRef.current.className = 'updating'
+  function removeStyle(target) {
+    target.className = ''
   }
 
   function handleChange(e) {
-    debounceChange(e.target.value).then(addStyleNow).then(removeStyleLater)
+    debounceChange(contentRef.current, e.target.value)
+      .then(addStyleNow)
+      .then(removeStyleLater)
   }
-  
   return (
     <div>
       <textarea
@@ -94,7 +97,9 @@ Another use case is changes debouncing. In below example debounced change in tex
 ```
 As you can see in this line of code:
 ```jsx
-debounceChange(e.target.value).then(addStyleNow).then(removeStyleLater)
+    debounceChange(contentRef.current, e.target.value)
+      .then(addStyleNow)
+      .then(removeStyleLater)
 ```
 changes debounced, then add style to show the applied change and finally remove the style after 1 second.
 
