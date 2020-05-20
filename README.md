@@ -114,6 +114,25 @@ As you can see in this line of code:
 ```
 First any changes debounced, then a css class added to show the changes and finally it will be removed after 1 second.
 
+# Details
+
+```jsx
+  const [delayedFunction, cancelIt] = useDelayedFunction(
+    originalFunction,
+    delay,
+    rejectOnCancel
+  )
+```
+
+- `delayedFunction` 
+Is a wrapper function which always returns a promise. It accepts and passes down arguments to the `originalFunction`.
+It will resolve to `originalFunction` return value unless it canceled before.
+If either new call to this function happened or canceled by `cancelIt` method it 
+
+
+
+
+
 ## License
 
 MIT © [makannew](https://github.com/makannew)
