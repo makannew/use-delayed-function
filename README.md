@@ -150,7 +150,7 @@ First any changes debounced, then a css class added to show the changes and fina
 - #### `cancelIt(doNotReject)`
   - Is a function which will cancel any pending call to `originalFunction`.
   - If it was too late and `originalFunction` already fired it will break the chain and ignore its return value.
-  - Calling this function will cause reject of `delayedFunction` if `rejectOnCancel===true` otherwise leave
+  - Calling this function will cause reject of `delayedFunction` if `rejectOnCancel===true` otherwise it leaves
     the promise in pending state to be removed by garbage collector.
   - If `doNotReject==true` it won't reject the promise even `rejectOnCancel===true`
   
