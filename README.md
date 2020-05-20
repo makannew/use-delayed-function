@@ -54,7 +54,8 @@ export default SimpleExample
 
 ```
 
-Another use case is changes debouncing. In below example debounced change in textarea is shown in a paragraph.
+
+Another use case is changes debouncing. In below example debounced change in textarea is shown in another paragraph.
 
 ```jsx
   const [debounceChange] = useDelayedFunction(changeContent, 900)
@@ -91,11 +92,11 @@ Another use case is changes debouncing. In below example debounced change in tex
   )
 
 ```
-As you can see his line of code:
+As you can see in this line of code:
 ```jsx
 debounceChange(e.target.value).then(addStyleNow).then(removeStyleLater)
 ```
-debounce the changes, then add style to show the applied change and finally remove the style after 1 second.
+changes debounced, then add style to show the applied change and finally remove the style after 1 second.
 
 ## License
 
