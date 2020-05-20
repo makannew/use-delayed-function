@@ -164,7 +164,7 @@ First any changes debounced, then a css class added to show the changes and fina
     
   
 - #### `delay`
-  - Is delay before calling the `originalFunction`
+  - Is the delay before calling the `originalFunction`
   - Is in milliseconds
   - If not specified considered as 0
   - If it specified by a prop or state any changes to its value will change delay duration in runtime
