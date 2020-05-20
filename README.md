@@ -7,6 +7,12 @@
 
 This hook provides a safe way to call a function with delay and it takes care of required cleanups. In addition, these delayed functions could chain together so it can be used to accomplish sequential (or asynchronous) tasks where we don't want to have sequential state changes.
 
+## Install
+
+```bash
+npm install --save use-delayed-function
+```
+
 General structure:
 ```jsx
   const [delayedFunction, cancelIt] = useDelayedFunction(
@@ -30,11 +36,6 @@ It is also a handy tool for applying timing logics inside react components e.g. 
 
 Activities of this hook doesn't change state of the component (unless the called function set an state) so it won't cause extra rendering. The stateful version of this hook is [`use-delayed-state`](https://github.com/makannew/use-delayed-state)
 
-## Install
-
-```bash
-npm install --save use-delayed-function
-```
 
 ## How to use
 
