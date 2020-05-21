@@ -140,7 +140,7 @@ As you can see in this line of code we can easily manage the timing logic that w
 ```
 
 - #### `delayedFunction` 
-  - Is a wrapper function which always returns a promise. 
+  - Is a function wrapped around the `originalFunction` and always returns a promise. 
   - It accepts and passes down arguments to the `originalFunction`.
   - It will resolve to return value of the `originalFunction`.
   - If "originalFunction" is an async function the best time for `setState` or DOM manipulation tasks is where it resolved.
