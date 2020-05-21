@@ -173,6 +173,7 @@ As you can see in this line of code we can easily manage the timing logic that w
   - Is an optional boolian parameter. If not specified considered as `false`
   - If `rejectOnCancel==true` the canceled calls will reject to 
     `{ message: 'Function call canceled', timestamp: Date.now() }`
+  - It is useful for tracking canceled calls
 
 
 
