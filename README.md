@@ -5,7 +5,10 @@
 [![NPM](https://img.shields.io/npm/v/use-delayed-function.svg)](https://www.npmjs.com/package/use-delayed-function) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 
-This hook provides a safe way to call a function with delay and it takes care of required cleanups. In addition, these delayed functions could chain together so it can be used to accomplish sequential (or asynchronous) tasks where we don't want to have sequential state changes.
+This hook provides a safe way to call a function with delay and it takes care of required cleanups. 
+
+It doesn't have state and it won't cause extra rendering, so it is useful for sequential (or asynchronous) tasks where we want chain async functions on top of each others.
+
 
 ## Install
 
@@ -30,9 +33,11 @@ delayedFunction(para).then(result=>{setState(result)})
 
 ## Use cases
 
-It can be used for [debouncing](https://css-tricks.com/debouncing-throttling-explained-examples/#article-header-id-0) which simply delays all consecuative attempts to call a function and finally the last attempt runs if it persists for enough time.
+It can be used for [debouncing](https://css-tricks.com/debouncing-throttling-explained-examples/#article-header-id-0) which simply delays all consecuative attempts to call a function and finally the last attempt runs if it persists enough time.
 
 It is also a handy tool for applying timing logics inside react components e.g. Showing a notification for few seconds.
+
+It is also a good choice to handle initializing stage of a component. Combination of calling functions, async task or even changing states in sequence can be handled through promise chain provided behind the scene. This kind of behaviour is mostly desirable while initializing a component.
 
 Activities of this hook doesn't change state of the component (unless the called function set an state) so it won't cause extra rendering. The stateful version of this hook is [`use-delayed-state`](https://github.com/makannew/use-delayed-state)
 
@@ -116,13 +121,13 @@ In debouncing example any debounced changes in textarea appears in another parag
   )
 
 ```
-As you can see in this line of code:
+As you can see in this line of code we can easily manage the timing logic that we want.
 ```jsx
     debounceChange(contentRef.current, e.target.value)
       .then(addStyleNow)
       .then(removeStyleLater)
 ```
-First any changes debounced, then a css class added to show the changes and finally it will be removed after 1 second.
+
 
 ## Details
 
@@ -135,7 +140,7 @@ First any changes debounced, then a css class added to show the changes and fina
 ```
 
 - #### `delayedFunction` 
-  - Is a wrapper function which always returns a promise. 
+  - Is a function wrapped around the `originalFunction` and always returns a promise. 
   - It accepts and passes down arguments to the `originalFunction`.
   - It will resolve to return value of the `originalFunction`.
   - If "originalFunction" is an async function the best time for `setState` or DOM manipulation tasks is where it resolved.
@@ -145,7 +150,7 @@ First any changes debounced, then a css class added to show the changes and fina
 - #### `cancelIt(doNotReject)`
   - Is a function which will cancel any pending call to `originalFunction`.
   - If it was too late and `originalFunction` already fired it will break the chain and ignore its return value.
-  - Calling this function will cause reject of `delayedFunction` if `rejectOnCancel===true` otherwise leave
+  - Calling this function will cause reject of `delayedFunction` if `rejectOnCancel===true` otherwise it leaves
     the promise in pending state to be removed by garbage collector.
   - If `doNotReject==true` it won't reject the promise even `rejectOnCancel===true`
   
@@ -159,15 +164,16 @@ First any changes debounced, then a css class added to show the changes and fina
     
   
 - #### `delay`
-  - Is delay before calling the `originalFunction`
+  - Is the delay before calling the `originalFunction`
   - Is in milliseconds
   - If not specified considered as 0
-  - If it specified by a prop or state any changes to its value will change delay duration in runtime
+  - If it specified by a prop or state they control delay duration runtime (delay will change if they change).
   
 - #### `rejectOnCancel`
   - Is an optional boolian parameter. If not specified considered as `false`
-  - If `rejectOnCancel===true` the canceled calls will reject to 
+  - If `rejectOnCancel==true` the canceled calls will reject to 
     `{ message: 'Function call canceled', timestamp: Date.now() }`
+  - It is useful for tracking canceled calls
 
 
 
