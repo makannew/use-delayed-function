@@ -167,7 +167,8 @@ As you can see in this line of code we can easily manage the timing logic that w
   - Is the delay before calling the `originalFunction`
   - Is in milliseconds
   - If not specified considered as 0
-  - If it specified by a prop or state they control delay duration runtime (delay will change if they change).
+  - It could be a `useRef` object so delay value loaded from `refObject.current`
+  - If it specified by a prop,state or ref, runtime value of delay will change if they change
   
 - #### `rejectOnCancel`
   - Is an optional boolian parameter. If not specified considered as `false`
