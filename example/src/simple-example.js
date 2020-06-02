@@ -16,8 +16,12 @@ const SimpleExample = ({ delay = 4000 }) => {
   }, [])
 
   return (
-    <div className='container simple-example'>
-      <p ref={divRef}>{`This content will change ${delay}ms after mounting`}</p>
+    <div>
+      <div className='container simple-example'>
+        <p
+          ref={divRef}
+        >{`This content will change ${delay}ms after mounting`}</p>
+      </div>
       <div className='links'>
         <a href='https://github.com/makannew/use-delayed-function/blob/master/example/src/simple-example.js'>
           Source code
